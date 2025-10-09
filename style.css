@@ -1,0 +1,203 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.attempts {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+#attempts {
+    color: #ffd700;
+}
+
+#escapingButton {
+    position: fixed;
+    padding: 12px 24px; /* Smaller button - harder to click! */
+    font-size: 1rem; /* Smaller font */
+    font-weight: bold;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.05s ease; /* Faster transition - moves quicker! */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+#escapingButton:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+#escapingButton:active {
+    transform: translate(-50%, -50%) scale(0.95);
+}
+
+#startScreen {
+    text-align: center;
+}
+
+.instructions {
+    font-size: 1.3rem;
+    margin: 20px 0 40px 0;
+    opacity: 0.9;
+}
+
+#startButton {
+    padding: 20px 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#startButton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+#startButton:active {
+    transform: scale(1.05);
+}
+
+#gameScreen {
+    text-align: center;
+}
+
+.roast-message {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ffd700;
+    margin: 15px 0;
+    min-height: 35px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#idiotScreen {
+    text-align: center;
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    10% { transform: translate(-10px, -10px) rotate(-2deg); }
+    20% { transform: translate(10px, 10px) rotate(2deg); }
+    30% { transform: translate(-10px, 10px) rotate(-2deg); }
+    40% { transform: translate(10px, -10px) rotate(2deg); }
+    50% { transform: translate(-10px, -10px) rotate(-2deg); }
+    60% { transform: translate(10px, 10px) rotate(2deg); }
+    70% { transform: translate(-10px, 10px) rotate(-2deg); }
+    80% { transform: translate(10px, -10px) rotate(2deg); }
+    90% { transform: translate(-10px, -10px) rotate(-2deg); }
+}
+
+.idiot-title {
+    font-size: 4rem;
+    color: #ff0000;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+    animation: colorChange 1s infinite;
+}
+
+@keyframes colorChange {
+    0% { color: #ff0000; }
+    25% { color: #ff6600; }
+    50% { color: #ffff00; }
+    75% { color: #ff6600; }
+    100% { color: #ff0000; }
+}
+
+.idiot-message {
+    font-size: 1.8rem;
+    margin: 20px 0;
+    color: white;
+}
+
+.fake-download {
+    margin: 50px auto;
+    max-width: 500px;
+}
+
+.download-bar {
+    width: 100%;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.download-progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff0000, #ff6600, #ffff00);
+    transition: width 0.1s linear;
+}
+
+.download-text {
+    font-size: 1.2rem;
+    color: white;
+}
+
+#closeButton {
+    margin-top: 30px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#closeButton:hover {
+    background: #cc0000;
+    transform: scale(1.1);
+}

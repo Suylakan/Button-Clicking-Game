@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escaping Button</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="startScreen">
+            <h1>Escaping Button Game! 🎮</h1>
+            <p class="instructions">Try to click the button before it runs away!</p>
+            <button id="startButton">Start Game 🚀</button>
+        </div>
+        <div id="gameScreen" style="display: none;">
+            <h1>Try to Click the Button!</h1>
+            <p class="attempts">Attempts: <span id="attempts">0</span></p>
+            <p id="roastMessage" class="roast-message"></p>
+            <button id="escapingButton">Catch Me If You Can! 😜</button>
+        </div>
+        <div id="idiotScreen" style="display: none;">
+            <h1 class="idiot-title">YOU ARE AN IDIOT! 🤡</h1>
+            <p class="idiot-message">You actually tried 1000 times... WOW! 😂</p>
+            <p class="idiot-message">Downloading your failure report...</p>
+            <div class="fake-download">
+                <div class="download-bar">
+                    <div class="download-progress" id="downloadProgress"></div>
+                </div>
+                <p class="download-text">idiot_certificate.txt - <span id="downloadPercent">0</span>%</p>
+            </div>
+            <button id="closeButton" style="display: none;">Close Window 😭</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
