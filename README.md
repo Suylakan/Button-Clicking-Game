@@ -169,7 +169,7 @@ This project is licensed under the MIT License - feel free to use it for whateve
 
 **Harun Berke Öztürk**
 
-- GitHub: [@yourusername](https://github.com/yourusername)
+- GitHub: [@ySuylakan](https://github.com/suylakan)
 
 ## 🎉 Acknowledgments
 
