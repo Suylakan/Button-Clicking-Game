@@ -51,12 +51,12 @@ Reach 1000 failed attempts and unlock:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/escaping-button.git
+git clone https://github.com/Suylakan/button-clicking-game.git
 ```
 
 2. Navigate to the project directory:
 ```bash
-cd escaping-button
+cd button clicking game
 ```
 
 3. Open `index.html` in your web browser:
