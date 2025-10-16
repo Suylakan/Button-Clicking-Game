@@ -31,7 +31,45 @@
             </div>
             <button id="closeButton" style="display: none;">Close Window 😭</button>
         </div>
+        <div id="cheaterScreen" style="display: none;">
+            <h1 class="cheater-title">CHEATER DETECTED! 🚨</h1>
+            <p class="cheater-message">You used debug hacks to win! 😏</p>
+            <p class="cheater-subtitle">That's not a REAL victory...</p>
+            <div class="cheater-stats">
+                <h3>🎮 Cheater Statistics</h3>
+                <p>Legitimate Attempts: <span id="legitAttempts" class="stat-value">0</span></p>
+                <p>Times Frozen: <span id="freezeCount" class="stat-value">0</span></p>
+                <p>Times Teleported: <span id="teleportCount" class="stat-value">0</span></p>
+                <p>Times Made Bigger: <span id="biggerCount" class="stat-value">0</span></p>
+                <p>Slow Mode Used: <span id="slowUsed" class="stat-value">No</span></p>
+            </div>
+            <p class="cheater-verdict">VERDICT: Not Impressed! 🙄</p>
+            <button id="tryAgainButton" class="cheater-btn">Try Again (Without Cheats) 💪</button>
+        </div>
     </div>
+    
+    <!-- Debug Panel -->
+    <div id="debugPanel" style="display: none;">
+        <h3>🐛 Debug Mode</h3>
+        <p>Mouse: (<span id="debugMouseX">0</span>, <span id="debugMouseY">0</span>)</p>
+        <p>Button: (<span id="debugButtonX">0</span>, <span id="debugButtonY">0</span>)</p>
+        <p>Distance: <span id="debugDistance">0</span>px</p>
+        <p>Detection Radius: <span id="debugRadius">200</span>px</p>
+        <p>Status: <span id="debugStatus">Waiting</span></p>
+        <p>Attempts: <span id="debugAttempts">0</span></p>
+        <div class="debug-hacks">
+            <h4>⚡ Hacks/Cheats</h4>
+            <button id="hackFreeze" class="hack-btn">Freeze Button (F)</button>
+            <button id="hackSlow" class="hack-btn">Slow Mode (S)</button>
+            <button id="hackBigger" class="hack-btn">Bigger Button (B)</button>
+            <button id="hackTeleport" class="hack-btn">Teleport to Mouse (T)</button>
+            <button id="hackReset" class="hack-btn">Reset Attempts (R)</button>
+            <button id="hackIncrease" class="hack-btn">+100 Attempts (I)</button>
+            <button id="hackJump1000" class="hack-btn">Jump to 1000 (K)</button>
+        </div>
+        <p class="debug-hint">Press 'D' to toggle debug mode</p>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>

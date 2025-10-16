@@ -14,6 +14,166 @@ let lastMouseMoveTime = Date.now();
 let roastTimer = null;
 let justEscaped = false; // Flag to prevent multiple counts
 
+// Debug mode variables
+let debugMode = false;
+let hackFreezeActive = false;
+let hackSlowActive = false;
+let hackBiggerActive = false;
+const debugPanel = document.getElementById('debugPanel');
+const debugMouseX = document.getElementById('debugMouseX');
+const debugMouseY = document.getElementById('debugMouseY');
+const debugButtonX = document.getElementById('debugButtonX');
+const debugButtonY = document.getElementById('debugButtonY');
+const debugDistance = document.getElementById('debugDistance');
+const debugRadius = document.getElementById('debugRadius');
+const debugStatus = document.getElementById('debugStatus');
+const debugAttempts = document.getElementById('debugAttempts');
+
+// Hack buttons
+const hackFreezeBtn = document.getElementById('hackFreeze');
+const hackSlowBtn = document.getElementById('hackSlow');
+const hackBiggerBtn = document.getElementById('hackBigger');
+const hackTeleportBtn = document.getElementById('hackTeleport');
+const hackResetBtn = document.getElementById('hackReset');
+const hackIncreaseBtn = document.getElementById('hackIncrease');
+const hackJump1000Btn = document.getElementById('hackJump1000');
+
+// Cheater screen elements
+const cheaterScreen = document.getElementById('cheaterScreen');
+const legitAttemptsDisplay = document.getElementById('legitAttempts');
+const freezeCountDisplay = document.getElementById('freezeCount');
+const teleportCountDisplay = document.getElementById('teleportCount');
+const biggerCountDisplay = document.getElementById('biggerCount');
+const slowUsedDisplay = document.getElementById('slowUsed');
+const tryAgainButton = document.getElementById('tryAgainButton');
+
+// Track cheat usage
+let cheatsUsed = false;
+let legitAttempts = 0;
+let freezeCount = 0;
+let teleportCount = 0;
+let biggerCount = 0;
+let slowUsed = false;
+
+// Toggle debug mode with 'D' key
+document.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'd') {
+        debugMode = !debugMode;
+        debugPanel.style.display = debugMode ? 'block' : 'none';
+        if (debugMode) {
+            updateDebugInfo(0, 0); // Initialize with current values
+        }
+    }
+    
+    // Keyboard shortcuts for hacks (only when debug mode is on)
+    if (debugMode && gameStarted) {
+        if (e.key.toLowerCase() === 'f') {
+            toggleFreeze();
+        } else if (e.key.toLowerCase() === 's') {
+            toggleSlow();
+        } else if (e.key.toLowerCase() === 'b') {
+            toggleBigger();
+        } else if (e.key.toLowerCase() === 't') {
+            hackTeleport();
+        } else if (e.key.toLowerCase() === 'r') {
+            hackResetAttempts();
+        } else if (e.key.toLowerCase() === 'i') {
+            hackIncreaseAttempts();
+        } else if (e.key.toLowerCase() === 'k') {
+            hackJumpTo1000();
+        }
+    }
+});
+
+// Hack: Freeze button
+hackFreezeBtn.addEventListener('click', toggleFreeze);
+function toggleFreeze() {
+    hackFreezeActive = !hackFreezeActive;
+    hackFreezeBtn.classList.toggle('active', hackFreezeActive);
+    hackFreezeBtn.textContent = hackFreezeActive ? '🔒 Frozen (F)' : 'Freeze Button (F)';
+    if (hackFreezeActive) {
+        cheatsUsed = true;
+        freezeCount++;
+    }
+}
+
+// Hack: Slow mode (increase detection radius to make it easier)
+hackSlowBtn.addEventListener('click', toggleSlow);
+function toggleSlow() {
+    hackSlowActive = !hackSlowActive;
+    hackSlowBtn.classList.toggle('active', hackSlowActive);
+    hackSlowBtn.textContent = hackSlowActive ? '🐌 Slow Mode ON (S)' : 'Slow Mode (S)';
+    if (hackSlowActive) {
+        cheatsUsed = true;
+        slowUsed = true;
+    }
+}
+
+// Hack: Make button bigger
+hackBiggerBtn.addEventListener('click', toggleBigger);
+function toggleBigger() {
+    hackBiggerActive = !hackBiggerActive;
+    hackBiggerBtn.classList.toggle('active', hackBiggerActive);
+    if (hackBiggerActive) {
+        button.style.padding = '25px 50px';
+        button.style.fontSize = '1.5rem';
+        hackBiggerBtn.textContent = '🔍 Big Button ON (B)';
+        cheatsUsed = true;
+        biggerCount++;
+    } else {
+        button.style.padding = '12px 24px';
+        button.style.fontSize = '1rem';
+        hackBiggerBtn.textContent = 'Bigger Button (B)';
+    }
+}
+
+// Hack: Teleport button to mouse
+hackTeleportBtn.addEventListener('click', hackTeleport);
+function hackTeleport() {
+    const mousePos = { x: parseInt(debugMouseX.textContent), y: parseInt(debugMouseY.textContent) };
+    if (mousePos.x && mousePos.y) {
+        button.style.left = mousePos.x + 'px';
+        button.style.top = mousePos.y + 'px';
+        button.style.transform = 'translate(-50%, -50%)';
+        cheatsUsed = true;
+        teleportCount++;
+    }
+}
+
+// Hack: Reset attempts
+hackResetBtn.addEventListener('click', hackResetAttempts);
+function hackResetAttempts() {
+    attempts = 0;
+    attemptsDisplay.textContent = attempts;
+    debugAttempts.textContent = attempts;
+    roastMessage.textContent = '';
+}
+
+// Hack: Increase attempts by 100
+hackIncreaseBtn.addEventListener('click', hackIncreaseAttempts);
+function hackIncreaseAttempts() {
+    attempts += 100;
+    attemptsDisplay.textContent = attempts;
+    debugAttempts.textContent = attempts;
+    
+    // Check if we should roast based on new attempts
+    checkAttemptRoast(attempts);
+    
+    // Check if reached 1000 attempts
+    if (attempts >= 1000) {
+        showIdiotScreen();
+    }
+}
+
+// Hack: Jump directly to 1000 attempts (trigger idiot screen)
+hackJump1000Btn.addEventListener('click', hackJumpTo1000);
+function hackJumpTo1000() {
+    attempts = 1000;
+    attemptsDisplay.textContent = attempts;
+    debugAttempts.textContent = attempts;
+    showIdiotScreen();
+}
+
 // Array of roasting messages for idle players
 const idleRoasts = [
     "Are you even trying? 😴",
@@ -150,8 +310,44 @@ function moveButton(mouseX, mouseY) {
         Math.pow(mouseY - buttonCenterY, 2)
     );
     
+    // Update debug info if debug mode is on
+    if (debugMode) {
+        updateDebugInfo(mouseX, mouseY, buttonCenterX, buttonCenterY, distance);
+    }
+    
+    // Apply hacks
+    if (hackFreezeActive) {
+        // Button is frozen, but still count attempts
+        if (distance < detectionRadius && !justEscaped) {
+            attempts++;
+            attemptsDisplay.textContent = attempts;
+            
+            if (debugMode) {
+                debugStatus.textContent = 'FROZEN 🔒';
+                debugAttempts.textContent = attempts;
+            }
+            
+            // Check if reached 1000 attempts
+            if (attempts >= 1000) {
+                showIdiotScreen();
+                return;
+            }
+            
+            // Check if we should roast based on attempts
+            checkAttemptRoast(attempts);
+            
+            justEscaped = true;
+        } else if (distance >= detectionRadius) {
+            justEscaped = false;
+        }
+        return;
+    }
+    
+    // Adjust detection radius based on slow mode hack
+    const effectiveRadius = hackSlowActive ? detectionRadius * 0.5 : detectionRadius;
+    
     // If mouse is too close, move the button
-    if (distance < detectionRadius) {
+    if (distance < effectiveRadius) {
         // Only count once per escape
         if (!justEscaped) {
             const newPos = getRandomPosition(mouseX, mouseY);
@@ -162,6 +358,17 @@ function moveButton(mouseX, mouseY) {
             // Increment attempts counter
             attempts++;
             attemptsDisplay.textContent = attempts;
+            
+            // Track legitimate attempts (no cheats used)
+            if (!cheatsUsed) {
+                legitAttempts++;
+            }
+            
+            // Update debug status
+            if (debugMode) {
+                debugStatus.textContent = 'ESCAPED!';
+                debugAttempts.textContent = attempts;
+            }
             
             // Check if reached 1000 attempts
             if (attempts >= 1000) {
@@ -178,7 +385,24 @@ function moveButton(mouseX, mouseY) {
     } else {
         // Reset flag when mouse is far away
         justEscaped = false;
+        if (debugMode) {
+            debugStatus.textContent = distance < effectiveRadius * 1.5 ? 'Warning Zone' : 'Safe';
+        }
     }
+}
+
+// Function to update debug information
+function updateDebugInfo(mouseX, mouseY, buttonX = 0, buttonY = 0, distance = 0) {
+    debugMouseX.textContent = Math.round(mouseX);
+    debugMouseY.textContent = Math.round(mouseY);
+    
+    if (buttonX && buttonY) {
+        debugButtonX.textContent = Math.round(buttonX);
+        debugButtonY.textContent = Math.round(buttonY);
+    }
+    
+    debugDistance.textContent = Math.round(distance);
+    debugAttempts.textContent = attempts;
 }
 
 // Track mouse movement
@@ -195,17 +419,73 @@ button.addEventListener('click', (e) => {
     e.preventDefault();
     roastMessage.textContent = '';
     clearInterval(roastTimer);
-    alert('🎉 Wow! You actually clicked it! You are amazing! 🎉');
+    
+    // Check if cheats were used
+    if (cheatsUsed) {
+        showCheaterScreen();
+    } else {
+        // Legitimate win!
+        alert('🎉 Wow! You actually clicked it! You are amazing! 🎉\n\nAND YOU DID IT WITHOUT CHEATS! 👑');
+        resetGame();
+    }
+});
+
+// Function to show cheater screen
+function showCheaterScreen() {
+    gameScreen.style.display = 'none';
+    cheaterScreen.style.display = 'block';
+    gameStarted = false;
+    
+    // Display cheater statistics
+    legitAttemptsDisplay.textContent = legitAttempts;
+    freezeCountDisplay.textContent = freezeCount;
+    teleportCountDisplay.textContent = teleportCount;
+    biggerCountDisplay.textContent = biggerCount;
+    slowUsedDisplay.textContent = slowUsed ? 'Yes' : 'No';
+}
+
+// Try again button
+tryAgainButton.addEventListener('click', () => {
+    resetGame();
+    cheaterScreen.style.display = 'none';
+    startScreen.style.display = 'block';
+});
+
+// Function to reset game state
+function resetGame() {
     attempts = 0;
+    legitAttempts = 0;
     attemptsDisplay.textContent = attempts;
     lastMouseMoveTime = Date.now();
-    // Reset button position
+    
+    // Reset all cheats
+    cheatsUsed = false;
+    freezeCount = 0;
+    teleportCount = 0;
+    biggerCount = 0;
+    slowUsed = false;
+    hackFreezeActive = false;
+    hackSlowActive = false;
+    hackBiggerActive = false;
+    
+    // Reset button appearance
+    button.style.padding = '12px 24px';
+    button.style.fontSize = '1rem';
     button.style.left = '50%';
     button.style.top = '50%';
     button.style.transform = 'translate(-50%, -50%)';
+    
+    // Reset hack buttons
+    hackFreezeBtn.classList.remove('active');
+    hackFreezeBtn.textContent = 'Freeze Button (F)';
+    hackSlowBtn.classList.remove('active');
+    hackSlowBtn.textContent = 'Slow Mode (S)';
+    hackBiggerBtn.classList.remove('active');
+    hackBiggerBtn.textContent = 'Bigger Button (B)';
+    
     // Restart roast timer
     roastTimer = setInterval(checkIdle, 3000);
-});
+}
 
 // Handle touch events for mobile devices
 button.addEventListener('touchstart', (e) => {

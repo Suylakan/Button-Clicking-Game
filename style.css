@@ -201,3 +201,187 @@ h1 {
     background: #cc0000;
     transform: scale(1.1);
 }
+
+/* Cheater Screen Styles */
+#cheaterScreen {
+    text-align: center;
+}
+
+.cheater-title {
+    font-size: 3.5rem;
+    color: #ff6600;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.5; }
+}
+
+.cheater-message {
+    font-size: 1.8rem;
+    margin: 15px 0;
+    color: white;
+}
+
+.cheater-subtitle {
+    font-size: 1.4rem;
+    color: #ffaa00;
+    font-style: italic;
+    margin: 10px 0 30px 0;
+}
+
+.cheater-stats {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid #ff6600;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 30px auto;
+    max-width: 500px;
+}
+
+.cheater-stats h3 {
+    color: #ffaa00;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.cheater-stats p {
+    font-size: 1.2rem;
+    margin: 12px 0;
+    color: white;
+    text-align: left;
+}
+
+.stat-value {
+    color: #ff6600;
+    font-weight: bold;
+    float: right;
+}
+
+.cheater-verdict {
+    font-size: 2rem;
+    color: #ff0000;
+    font-weight: bold;
+    margin: 30px 0;
+    text-transform: uppercase;
+}
+
+.cheater-btn {
+    padding: 15px 35px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #ff6600 0%, #ff0000 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+}
+
+.cheater-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(255, 102, 0, 0.6);
+}
+
+.cheater-btn:active {
+    transform: scale(1.05);
+}
+
+/* Debug Panel Styles */
+#debugPanel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #00ff00;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    z-index: 10000;
+    min-width: 280px;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+#debugPanel h3 {
+    margin: 0 0 15px 0;
+    color: #00ff00;
+    font-size: 1.2rem;
+    text-align: center;
+    border-bottom: 1px solid #00ff00;
+    padding-bottom: 10px;
+}
+
+#debugPanel p {
+    margin: 8px 0;
+    color: #00ff00;
+}
+
+#debugPanel span {
+    color: #ffff00;
+    font-weight: bold;
+}
+
+.debug-hint {
+    margin-top: 15px !important;
+    padding-top: 10px;
+    border-top: 1px solid #00ff00;
+    font-size: 0.8rem !important;
+    opacity: 0.7;
+    text-align: center;
+}
+
+#debugStatus {
+    color: #ff00ff !important;
+}
+
+.debug-hacks {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #00ff00;
+}
+
+.debug-hacks h4 {
+    color: #ffff00;
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.hack-btn {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    background: rgba(0, 255, 0, 0.2);
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.hack-btn:hover {
+    background: rgba(0, 255, 0, 0.4);
+    transform: scale(1.02);
+}
+
+.hack-btn:active {
+    background: rgba(0, 255, 0, 0.6);
+    transform: scale(0.98);
+}
+
+.hack-btn.active {
+    background: rgba(255, 255, 0, 0.3);
+    color: #ffff00;
+    border-color: #ffff00;
+}

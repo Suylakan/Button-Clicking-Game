@@ -1,4 +1,4 @@
-# 🏃‍♂️ Escaping Button Game
+# 🏃‍♂️ Button Clicking Game
 
 A hilarious and frustrating interactive web game where you try to click a button that runs away from your mouse cursor!
 
@@ -7,7 +7,7 @@ A hilarious and frustrating interactive web game where you try to click a button
 
 ## 🎮 About The Game
 
-The **Escaping Button Game** is a fun and challenging browser-based game where your mission is simple: click the button. But there's a catch - the button is smart and will escape from your cursor whenever you get too close! 
+The **Button Clicking Game** is a fun and challenging browser-based game where your mission is simple: click the button. But there's a catch - the button is smart and will escape from your cursor whenever you get too close! 
 
 Can you outsmart the AI and actually click it? Spoiler: probably not! 😈
 
@@ -41,9 +41,43 @@ Reach 1000 failed attempts and unlock:
 - **Automatic download** of a "Certificate of Idiocy" text file
 - The ultimate humiliation experience!
 
+### 🚨 Cheater Detection System
+If you use debug hacks to win:
+- Special "CHEATER DETECTED" screen appears instead of victory
+- Shows detailed statistics of all cheats used:
+  - Number of legitimate attempts
+  - Times frozen, teleported, made bigger
+  - Whether slow mode was used
+- Verdict: "Not Impressed!" 
+- Option to try again without cheats for a real victory
+- Only legitimate wins (no debug hacks) get the true victory message!
+
 ### 📱 Mobile Support
 - Full touch screen support for mobile devices
 - Responsive design that works on all screen sizes
+
+### 🐛 Debug Mode
+- Press `D` key to toggle debug mode
+- Shows real-time information:
+  - Mouse position (X, Y)
+  - Button position (X, Y)
+  - Distance between mouse and button
+  - Detection radius visualization
+  - Escape status indicator
+- Visual debug overlay with semi-transparent background
+- Perfect for understanding game mechanics or adjusting difficulty
+
+#### ⚡ Built-in Hacks/Cheats:
+Debug mode includes powerful cheats:
+1. **Freeze Button (F)**: Completely stops the button from moving
+2. **Slow Mode (S)**: Reduces detection radius by 50% (makes it easier)
+3. **Bigger Button (B)**: Doubles the button size for easier clicking
+4. **Teleport to Mouse (T)**: Brings button directly to your cursor
+5. **Reset Attempts (R)**: Resets the attempt counter back to 0
+6. **+100 Attempts (I)**: Instantly adds 100 to your attempt count
+7. **Jump to 1000 (K)**: Sets attempts to 1000 and triggers the idiot screen
+
+All hacks can be toggled with keyboard shortcuts (shown in parentheses) or by clicking the buttons in the debug panel. Active hacks are highlighted in yellow!
 
 ## 🚀 Getting Started
 
@@ -51,12 +85,12 @@ Reach 1000 failed attempts and unlock:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Suylakan/button-clicking-game.git
+git clone https://github.com/Suylakan/Button-Clicking-Game.git
 ```
 
 2. Navigate to the project directory:
 ```bash
-cd button clicking game
+cd Button-Clicking-Game
 ```
 
 3. Open `index.html` in your web browser:
@@ -86,7 +120,7 @@ That's it! No dependencies, no build process, no servers needed. Pure vanilla HT
 
 ### File Structure
 ```
-escaping-button/
+Button-Clicking-Game/
 │
 ├── index.html          # Main HTML structure
 ├── style.css           # All styling and animations
@@ -167,9 +201,10 @@ This project is licensed under the MIT License - feel free to use it for whateve
 
 ## 👨‍💻 Author
 
-**Harun Berke Öztürk**
+**Harun Berke Öztürk (Suylakan)**
 
-- GitHub: [@ySuylakan](https://github.com/suylakan)
+- GitHub: [@Suylakan](https://github.com/Suylakan)
+- Repository: [Button-Clicking-Game](https://github.com/Suylakan/Button-Clicking-Game)
 
 ## 🎉 Acknowledgments
 
